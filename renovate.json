@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "config:base",
+    ":gitSignOff"
+  ],
+  "assignees": [
+    "nagyesta"
+  ],
+  "assigneesSampleSize": 1,
+  "commitMessageSuffix": "{patch}",
+  "github-actions": {
+    "pinDigests": true
+  },
+  "ignorePaths": [ "gradle-tests/**" ]
+}

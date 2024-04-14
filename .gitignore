@@ -1,0 +1,72 @@
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+## For subprojects
+*/.gradle
+*/build/
+!*/gradle/wrapper/gradle-wrapper.jar
+!*/**/src/main/**
+!*/**/src/test/**
+
+### STS ###
+*/.apt_generated
+*/.classpath
+*/.factorypath
+*/.project
+*/.settings
+*/.springBeans
+*/.sts4-cache
+
+### IntelliJ IDEA ###
+*/.idea
+*/*.iws
+*/*.iml
+*/*.ipr
+*/out/
+
+### NetBeans ###
+/*/nbproject/private/
+/*/nbbuild/
+/*/dist/
+/*/nbdist/
+/*/.nb-gradle/
+
+### VS Code ###
+*/.vscode/
+
+## examples
+
+gradle-tests/*/.gradle
+gradle-tests/*/gradle
+gradle-tests/*/build
+gradle-tests/*/gradlew
+gradle-tests/*/gradlew.bat
