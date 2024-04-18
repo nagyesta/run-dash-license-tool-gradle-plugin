@@ -3,7 +3,7 @@
 [![GitHub license](https://img.shields.io/github/license/nagyesta/run-dash-license-tool-gradle-plugin?color=informational)](https://raw.githubusercontent.com/nagyesta/run-dash-license-tool-gradle-plugin/main/LICENSE)
 [![Java version](https://img.shields.io/badge/Java%20version-17-yellow?logo=java)](https://img.shields.io/badge/Java%20version-17-yellow?logo=java)
 [![latest-release](https://img.shields.io/github/v/tag/nagyesta/run-dash-license-tool-gradle-plugin?color=blue&logo=git&label=releases&sort=semver)](https://github.com/nagyesta/run-dash-license-tool-gradle-plugin/releases)
-[![Gradle Plugin](https://img.shields.io/badge/gradle-plugin-blue?logo=gradle)](https://plugins.gradle.org/plugin/com.github.nagyesta.run-dash-license-tool-gradle-plugin)
+[![Gradle Plugin](https://img.shields.io/badge/gradle-plugin-blue?logo=gradle)](https://plugins.gradle.org/plugin/io.github.nagyesta.run-dash-license-tool-gradle-plugin)
 [![JavaCI](https://img.shields.io/github/actions/workflow/status/nagyesta/run-dash-license-tool-gradle-plugin/gradle.yml?logo=github&branch=main)](https://github.com/nagyesta/run-dash-license-tool-gradle-plugin/actions/workflows/gradle.yml)
 
 [![code-climate-maintainability](https://img.shields.io/codeclimate/maintainability/nagyesta/run-dash-license-tool-gradle-plugin?logo=code%20climate)](https://img.shields.io/codeclimate/maintainability/nagyesta/run-dash-license-tool-gradle-plugin?logo=code%20climate)
@@ -25,7 +25,7 @@ This project provides Gradle integration to allow convenient download and execut
 
 ```groovy
 plugins {
-    id "com.github.nagyesta.run-dash-license-tool-gradle-plugin" version "1.0.0"
+    id "io.github.nagyesta.run-dash-license-tool-gradle-plugin" version "<version>"
 }
 
 repositories {

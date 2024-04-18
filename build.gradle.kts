@@ -14,7 +14,7 @@ plugins {
     alias(libs.plugins.owasp.dependencycheck)
 }
 
-group = "com.github.nagyesta"
+group = "io.github.nagyesta"
 
 versioner {
     startFrom {
@@ -61,7 +61,7 @@ gradlePlugin {
         create("runDashLicenseToolPlugin") {
             displayName = "Run Dash License Tool Gradle Plugin"
             description = "Adds a convenient task to run the Run Dash License Tool on your Gradle build"
-            id = "com.github.nagyesta.run-dash-license-tool-gradle-plugin"
+            id = "io.github.nagyesta.run-dash-license-tool-gradle-plugin"
             implementationClass = "com.github.nagyesta.rundash.gradle.RunDashLicenseToolPlugin"
             tags.set(listOf("dash-license-tool", "license-check", "license", "dash", "run-dash"))
         }
