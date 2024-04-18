@@ -1,0 +1,59 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: JavaCI
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - '**/README.md'
+      - 'CODE_OF_CONDUCT.md'
+      - 'CONTRIBUTING.md'
+      - 'pull_request_template.md'
+      - 'SECURITY.md'
+      - 'LICENSE'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/assets/**'
+      - '.github/workflows/**'
+      - '.github/pr-labeler.yml'
+      - 'renovate.json'
+      - '.whitesource'
+      - 'gradle/libs.versions.toml'
+      - 'gradle/verification-metadata.xml'
+      - 'gradle/verification-metadata-clean.xml'
+      - 'gradle/wrapper/gradle-wrapper.properties'
+
+permissions: read-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Set up build environment
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 17
+        uses: actions/setup-java@99b8673ff64fbf99d8d325f52d9a5bdedb8483e9 # v4.2.1
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Build with Gradle
+        uses: gradle/actions/setup-gradle@62557f3635561c1c87913ef0282e1b50ebead1db # v3.3.0
+        with:
+          gradle-home-cache-cleanup: true
+          arguments: |
+            tagVersion build
+            -PgithubUser=${{ secrets.PUBLISH_USER_NAME }}
+            -PgithubToken=${{ secrets.PUBLISH_KEY }}
+      - name: Publish with Gradle
+        uses: gradle/actions/setup-gradle@62557f3635561c1c87913ef0282e1b50ebead1db # v3.3.0
+        with:
+          arguments: |
+            publish publishPlugins
+            -PgithubUser=${{ secrets.PUBLISH_USER_NAME }}
+            -PgithubToken=${{ secrets.PUBLISH_KEY }}
+            -Pgradle.publish.key=${{ secrets.GRADLE_KEY }}
+            -Pgradle.publish.secret=${{ secrets.GRADLE_SECRET }}
