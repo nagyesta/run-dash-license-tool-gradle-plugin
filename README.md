@@ -53,5 +53,25 @@ runDashLicenseTool {
     failOnError false
     //Sets where we want to save the summary report
     summaryFile layout.buildDirectory.file("reports/dash-license/DEPENDENCIES").get().getAsFile()
+    //Defines the batch size of the Dash API calls
+    batchSize 500
+    //Can override the Clearly Defined API URL
+    clearlyDefinedUrl "https://api.clearlydefined.io/definitions"
+    //Confidence threshold expressed as integer percent (0-100)
+    confidence 60
+    //Can override the Eclipse Foundation API URL
+    eclipseFoundationApiUrl "https://www.eclipse.org/projects/services/license_check.php"
+    //Can override the URL of the approved licenses list
+    approvedLicensesUrl "https://www.eclipse.org/legal/licenses.json"
+    //Perform a review (must also specify the project and token
+    review false
+    //Sets the timeout for HTTP calls (in seconds)
+    timeout 30
+    //The short name of the current Eclipse Foundation project
+    eclipseProjectShortName ""
+    //The repository URL of the current Eclipse Foundation project
+    eclipseProjectRepoUrl ""
+    //The GitLab authentication token
+    gitLabAuthenticationToken ""
 }
 ```

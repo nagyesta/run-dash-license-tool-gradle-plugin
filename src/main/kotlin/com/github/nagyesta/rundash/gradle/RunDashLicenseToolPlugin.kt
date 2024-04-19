@@ -5,6 +5,8 @@
 package com.github.nagyesta.rundash.gradle
 
 import com.github.nagyesta.rundash.gradle.RunDashLicenseToolConfig.Companion.DEFAULT_VERSION
+import com.github.nagyesta.rundash.gradle.RunDashLicenseToolConfig.Companion.UNSPECIFIED_INT
+import com.github.nagyesta.rundash.gradle.RunDashLicenseToolConfig.Companion.UNSPECIFIED_STRING
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -122,13 +124,48 @@ open class RunDashLicenseToolPlugin @Inject constructor(project: Project) : Plug
             javaTask.mainClass.set("org.eclipse.dash.licenses.cli.Main")
             javaTask.workingDir = project.projectDir
             javaTask.classpath = project.files(dashJar.relativeTo(project.projectDir))
-            javaTask.args = listOf(
-                "-summary",
-                "${summaryFile.relativeTo(project.projectDir)}",
-                "${reportFile.relativeTo(project.projectDir)}"
-            )
-            javaTask.isIgnoreExitValue = !config.failOnError
+            javaTask.args = prepareCliArguments(summaryFile, project, config, reportFile)
+            javaTask.setIgnoreExitValue(!config.failOnError)
             redirectLogs(javaTask)
+        }
+    }
+
+    private fun prepareCliArguments(
+        summaryFile: File,
+        project: Project,
+        config: RunDashLicenseToolConfig,
+        reportFile: File
+    ): ArrayList<String> {
+        val args = ArrayList<String>()
+        args.add("-summary")
+        args.add("${summaryFile.relativeTo(project.projectDir)}")
+        addSwitchIfValueIsSet(args, "-batch", config.batchSize)
+        addSwitchIfValueIsSet(args, "-cd", config.clearlyDefinedUrl)
+        addSwitchIfValueIsSet(args, "-confidence", config.confidence)
+        addSwitchIfValueIsSet(args, "-ef", config.eclipseFoundationApiUrl)
+        addSwitchIfValueIsSet(args, "-lic", config.approvedLicensesUrl)
+        addSwitchIfValueIsSet(args, "-project", config.eclipseProjectShortName)
+        addSwitchIfValueIsSet(args, "-repo", config.eclipseProjectRepoUrl)
+        if (config.review) {
+            args.add("-review")
+        }
+        addSwitchIfValueIsSet(args, "-timeout", config.timeout)
+        addSwitchIfValueIsSet(args, "-token", config.gitLabAuthenticationToken)
+        args.add("${reportFile.relativeTo(project.projectDir)}")
+        return args
+    }
+
+    private fun addSwitchIfValueIsSet(to: ArrayList<String>, switch: String, value: String) {
+        if (value != UNSPECIFIED_STRING) {
+            to.add(switch)
+            to.add(value)
+        }
+    }
+
+    private fun addSwitchIfValueIsSet(to: ArrayList<String>, switch: String, value: Int) {
+        if (value != UNSPECIFIED_INT) {
+            to.add(switch)
+            to.add("$value")
         }
     }
 

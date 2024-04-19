@@ -60,13 +60,25 @@ gradlePlugin {
     plugins {
         create("runDashLicenseToolPlugin") {
             displayName = "Run Dash License Tool Gradle Plugin"
-            description = "Adds a convenient task to run the Run Dash License Tool on your Gradle build"
+            description = "Adds a convenient task to run the Eclipse Dash License Tool on your Gradle build"
             id = "io.github.nagyesta.run-dash-license-tool-gradle-plugin"
             implementationClass = "com.github.nagyesta.rundash.gradle.RunDashLicenseToolPlugin"
             tags.set(listOf("dash-license-tool", "license-check", "license", "dash", "run-dash"))
         }
     }
 }
+
+
+val copyLegalDocs = tasks.register("copyLegalDocs", Copy::class) {
+    from(file("$projectDir"))
+    include(listOf("LICENSE"))
+    into(layout.buildDirectory.dir("resources/main/META-INF").get().asFile)
+}
+tasks.jar.get().dependsOn(copyLegalDocs)
+tasks.javadoc.get().dependsOn(copyLegalDocs)
+tasks.compileTestKotlin.get().dependsOn(copyLegalDocs)
+tasks.pluginUnderTestMetadata.get().dependsOn(copyLegalDocs)
+tasks.processResources.get().finalizedBy(copyLegalDocs)
 
 tasks.test {
     useJUnitPlatform()
