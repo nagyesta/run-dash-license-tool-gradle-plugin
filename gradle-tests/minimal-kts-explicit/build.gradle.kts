@@ -18,6 +18,16 @@ runDashLicenseTool {
     includeTests = true
     failOnError = false
     summaryFile = layout.buildDirectory.file("dash-license/DEPENDENCIES").get().asFile
+    batchSize = 500
+    clearlyDefinedUrl = "https://api.clearlydefined.io/definitions"
+    confidence = 60
+    eclipseFoundationApiUrl = "https://www.eclipse.org/projects/services/license_check.php"
+    approvedLicensesUrl = "https://www.eclipse.org/legal/licenses.json"
+    review = false
+    timeout = 30
+    eclipseProjectShortName = ""
+    eclipseProjectRepoUrl = ""
+    gitLabAuthenticationToken = ""
 }
 
 tasks.withType<Test> {
