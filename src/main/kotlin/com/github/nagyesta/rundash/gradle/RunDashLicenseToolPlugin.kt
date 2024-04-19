@@ -18,7 +18,7 @@ import java.net.URL
 import java.util.*
 import javax.inject.Inject
 
-open class RunDashLicenseToolPlugin @Inject constructor(project: Project) : Plugin<Project> {
+open class RunDashLicenseToolPlugin @Inject constructor(@Suppress("UNUSED_PARAMETER") project: Project) : Plugin<Project> {
 
     companion object Constants {
         const val EXTENSION_NAME = "runDashLicenseTool"

@@ -22,7 +22,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.PUBLISH_KEY }}
-      - name: "Check existing tag"
+      - name: Check existing tag
         id: check
         run: |
           echo "::set-output name=has_tag::$(git log --format='format:%d' --decorate-refs="refs/tags/v*" -n 1 | grep tag | wc -l)"
@@ -33,11 +33,11 @@ jobs:
           echo "Execution: ${{ github.event.inputs.execution }}"
           echo "---"
           echo "Should run: ${{ steps.check.outputs.has_tag == 0 || github.event.inputs.execution == 'Manual' }}"
-      - name: "Update trigger"
+      - name: Update trigger
         if: ${{ steps.check.outputs.has_tag == 0 || github.event.inputs.execution == 'Manual' }}
         run: |
           date +%s > .release-trigger
-      - name: "git branch"
+      - name: Git branch
         if: ${{ steps.check.outputs.has_tag == 0 || github.event.inputs.execution == 'Manual' }}
         run: |
           git config --global user.name 'Esta Nagy'

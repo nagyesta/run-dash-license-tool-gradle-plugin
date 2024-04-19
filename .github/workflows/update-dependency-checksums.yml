@@ -18,14 +18,15 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - name: "Remove previous version"
+      - name: Remove previous version
         run: cp gradle/verification-metadata-clean.xml gradle/verification-metadata.xml
-      - name: "Update checksums"
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@750cdda3edd6d51b7fdfc069d2e2818cf3c44f4c # v3.3.1
         with:
           cache-disabled: true
-          arguments: --write-verification-metadata sha256
-      - name: "Git commit"
+      - name: Update checksums
+        run: ./gradlew --write-verification-metadata sha256
+      - name: Git commit
         run: |
           git config --global user.name 'Esta Nagy'
           git config --global user.email 'nagyesta@gmail.com'
