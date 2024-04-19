@@ -40,20 +40,19 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - name: Build with Gradle
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@750cdda3edd6d51b7fdfc069d2e2818cf3c44f4c # v3.3.1
         with:
           gradle-home-cache-cleanup: true
-          arguments: |
-            tagVersion build
-            -PgithubUser=${{ secrets.PUBLISH_USER_NAME }}
-            -PgithubToken=${{ secrets.PUBLISH_KEY }}
+      - name: Build with Gradle
+        run: |
+          ./gradlew tagVersion build 
+          -PgithubUser=${{ secrets.PUBLISH_USER_NAME }} 
+          -PgithubToken=${{ secrets.PUBLISH_KEY }}
       - name: Publish with Gradle
-        uses: gradle/actions/setup-gradle@750cdda3edd6d51b7fdfc069d2e2818cf3c44f4c # v3.3.1
-        with:
-          arguments: |
-            publish publishPlugins
-            -PgithubUser=${{ secrets.PUBLISH_USER_NAME }}
-            -PgithubToken=${{ secrets.PUBLISH_KEY }}
-            -Pgradle.publish.key=${{ secrets.GRADLE_KEY }}
-            -Pgradle.publish.secret=${{ secrets.GRADLE_SECRET }}
+        run: |
+          ./gradlew publish publishPlugins
+          -PgithubUser=${{ secrets.PUBLISH_USER_NAME }}
+          -PgithubToken=${{ secrets.PUBLISH_KEY }}
+          -Pgradle.publish.key=${{ secrets.GRADLE_KEY }}
+          -Pgradle.publish.secret=${{ secrets.GRADLE_SECRET }}
