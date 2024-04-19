@@ -45,12 +45,12 @@ jobs:
         with:
           gradle-home-cache-cleanup: true
       - name: Build with Gradle
-        run: |
+        run: >
           ./gradlew tagVersion build 
           -PgithubUser=${{ secrets.PUBLISH_USER_NAME }} 
           -PgithubToken=${{ secrets.PUBLISH_KEY }}
       - name: Publish with Gradle
-        run: |
+        run: >
           ./gradlew publish publishPlugins
           -PgithubUser=${{ secrets.PUBLISH_USER_NAME }}
           -PgithubToken=${{ secrets.PUBLISH_KEY }}
