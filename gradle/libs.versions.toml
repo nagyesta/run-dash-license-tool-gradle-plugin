@@ -6,6 +6,8 @@ pluginPublishPlugin = "1.2.1"
 gitVersionerPlugin = "1.6.7"
 indexScanPlugin = "2.8.2"
 owaspPlugin = "9.1.0"
+cycloneDxBomPlugin = "1.8.2"
+licenseePlugin = "1.11.0"
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -16,3 +18,5 @@ plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "pluginPublis
 versioner = { id = "io.toolebox.git-versioner", version.ref = "gitVersionerPlugin" }
 index-scan = { id = "org.sonatype.gradle.plugins.scan", version.ref = "indexScanPlugin" }
 owasp-dependencycheck = { id = "org.owasp.dependencycheck", version.ref = "owaspPlugin" }
+cyclonedx-bom = { id = "org.cyclonedx.bom", version.ref = "cycloneDxBomPlugin" }
+licensee-plugin = { id = "app.cash.licensee", version.ref = "licenseePlugin" }
