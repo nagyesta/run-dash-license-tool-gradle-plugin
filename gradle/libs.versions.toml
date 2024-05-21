@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.24"
+kotlin = "2.0.0"
 jupiter = "5.10.2"
 
 pluginPublishPlugin = "1.2.1"
