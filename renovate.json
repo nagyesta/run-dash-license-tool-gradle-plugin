@@ -1,6 +1,6 @@
 {
   "extends": [
-    "config:base",
+    "config:recommended",
     ":gitSignOff"
   ],
   "assignees": [
@@ -11,5 +11,7 @@
   "github-actions": {
     "pinDigests": true
   },
-  "ignorePaths": [ "gradle-tests/**" ]
+  "ignorePaths": [
+    "gradle-tests/**"
+  ]
 }
