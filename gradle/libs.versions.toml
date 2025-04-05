@@ -5,7 +5,7 @@ jupiter = "5.12.1"
 pluginPublishPlugin = "1.3.1"
 gitVersionerPlugin = "1.6.7"
 indexScanPlugin = "3.0.0"
-owaspPlugin = "12.1.0"
+owaspPlugin = "12.1.1"
 cycloneDxBomPlugin = "2.2.0"
 licenseePlugin = "1.13.0"
 
