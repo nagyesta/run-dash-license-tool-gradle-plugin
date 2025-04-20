@@ -1,7 +1,9 @@
 {
   "extends": [
     "config:recommended",
-    ":gitSignOff"
+    ":gitSignOff",
+    "group:allNonMajor",
+    "schedule:earlyMondays"
   ],
   "assignees": [
     "nagyesta"
@@ -12,6 +14,7 @@
     "pinDigests": true
   },
   "ignorePaths": [
-    "gradle-tests/**"
+    "gradle-tests/**/build.gradle.kts",
+    "gradle-tests/**/build.gradle"
   ]
 }

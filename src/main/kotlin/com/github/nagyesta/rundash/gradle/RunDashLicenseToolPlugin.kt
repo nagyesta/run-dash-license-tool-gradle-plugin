@@ -13,6 +13,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.tasks.JavaExec
+import org.gradle.api.tasks.TaskProvider
 import java.io.File
 import java.net.URL
 import java.util.*
@@ -37,8 +38,8 @@ open class RunDashLicenseToolPlugin @Inject constructor(@Suppress("UNUSED_PARAME
         val config = project.extensions
             .findByType(RunDashLicenseToolConfig::class.java) ?: RunDashLicenseToolConfig(project)
         val downloadTask = defineDownloadTask(config, project)
-        val dependencyReportTask = defineDependencyReportTask(config, project)
-        val runDashTask = defineRunDashTask(config, project)
+        val dependencyReportTask = defineDependencyReportTask(config, project).get()
+        val runDashTask = defineRunDashTask(config, project).get()
         runDashTask.dependsOn(dependencyReportTask)
         runDashTask.dependsOn(downloadTask)
     }
@@ -46,8 +47,8 @@ open class RunDashLicenseToolPlugin @Inject constructor(@Suppress("UNUSED_PARAME
     private fun defineDownloadTask(
         config: RunDashLicenseToolConfig,
         project: Project
-    ): DefaultTask {
-        return project.tasks.create(DEPENDENCY_DOWNLOAD_TASK_NAME, DefaultTask::class.java) { task ->
+    ): TaskProvider<DefaultTask> {
+        return project.tasks.register(DEPENDENCY_DOWNLOAD_TASK_NAME, DefaultTask::class.java) { task ->
             val dashJar = getDashJar(config, project)
             task.outputs.file(dashJar)
             task.doLast {
@@ -61,6 +62,7 @@ open class RunDashLicenseToolPlugin @Inject constructor(@Suppress("UNUSED_PARAME
         }
     }
 
+    @Suppress("kotlin:S1874")
     private fun getDashUrl(toolVersion: String): URL {
         return if (toolVersion == DEFAULT_VERSION) {
             URL(
@@ -79,8 +81,8 @@ open class RunDashLicenseToolPlugin @Inject constructor(@Suppress("UNUSED_PARAME
     private fun defineDependencyReportTask(
         config: RunDashLicenseToolConfig,
         project: Project
-    ): DefaultTask {
-        return project.tasks.create(DEPENDENCY_REPORT_TASK_NAME, DefaultTask::class.java) { task ->
+    ): TaskProvider<DefaultTask> {
+        return project.tasks.register(DEPENDENCY_REPORT_TASK_NAME, DefaultTask::class.java) { task ->
             val reportFile = getReportFile(project)
             task.outputs.file(reportFile)
             task.doLast {
@@ -113,11 +115,11 @@ open class RunDashLicenseToolPlugin @Inject constructor(@Suppress("UNUSED_PARAME
     private fun defineRunDashTask(
         config: RunDashLicenseToolConfig,
         project: Project
-    ): JavaExec {
+    ): TaskProvider<JavaExec> {
         val summaryFile = config.summaryFile
         val reportFile = getReportFile(project)
         val dashJar = getDashJar(config, project)
-        return project.tasks.create(RUN_DASH_TASK_NAME, JavaExec::class.java) { javaTask ->
+        return project.tasks.register(RUN_DASH_TASK_NAME, JavaExec::class.java) { javaTask ->
             javaTask.inputs.file(reportFile)
             javaTask.inputs.file(dashJar)
             javaTask.outputs.file(summaryFile)

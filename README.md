@@ -6,8 +6,8 @@
 [![Gradle Plugin](https://img.shields.io/badge/gradle-plugin-blue?logo=gradle)](https://plugins.gradle.org/plugin/io.github.nagyesta.run-dash-license-tool-gradle-plugin)
 [![JavaCI](https://img.shields.io/github/actions/workflow/status/nagyesta/run-dash-license-tool-gradle-plugin/gradle.yml?logo=github&branch=main)](https://github.com/nagyesta/run-dash-license-tool-gradle-plugin/actions/workflows/gradle.yml)
 
-[![code-climate-maintainability](https://img.shields.io/codeclimate/maintainability/nagyesta/run-dash-license-tool-gradle-plugin?logo=code%20climate)](https://img.shields.io/codeclimate/maintainability/nagyesta/run-dash-license-tool-gradle-plugin?logo=code%20climate)
-[![code-climate-tech-debt](https://img.shields.io/codeclimate/tech-debt/nagyesta/run-dash-license-tool-gradle-plugin?logo=code%20climate)](https://img.shields.io/codeclimate/tech-debt/nagyesta/run-dash-license-tool-gradle-plugin?logo=code%20climate)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=nagyesta_run-dash-license-tool-gradle-plugin&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=nagyesta_run-dash-license-tool-gradle-plugin)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=nagyesta_run-dash-license-tool-gradle-plugin&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=nagyesta_run-dash-license-tool-gradle-plugin)
 [![last_commit](https://img.shields.io/github/last-commit/nagyesta/run-dash-license-tool-gradle-plugin?logo=git)](https://img.shields.io/github/last-commit/nagyesta/run-dash-license-tool-gradle-plugin?logo=git)
 
 This project provides Gradle integration to allow convenient download and execution of the 

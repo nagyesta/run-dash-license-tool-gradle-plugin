@@ -5,25 +5,26 @@ name: JavaCI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths-ignore:
-      - 'README.md'
-      - '**/README.md'
-      - 'CODE_OF_CONDUCT.md'
-      - 'CONTRIBUTING.md'
-      - 'pull_request_template.md'
-      - 'SECURITY.md'
-      - 'LICENSE'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.github/assets/**'
-      - '.github/workflows/**'
-      - '.github/pr-labeler.yml'
-      - 'renovate.json'
-      - '.whitesource'
-      - 'gradle/libs.versions.toml'
-      - 'gradle/verification-metadata.xml'
-      - 'gradle/verification-metadata-clean.xml'
-      - 'gradle/wrapper/gradle-wrapper.properties'
+      - "README.md"
+      - "**/README.md"
+      - "CODE_OF_CONDUCT.md"
+      - "CONTRIBUTING.md"
+      - "pull_request_template.md"
+      - "SECURITY.md"
+      - "LICENSE"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/assets/**"
+      - ".github/workflows/**"
+      - ".github/pr-labeler.yml"
+      - "renovate.json"
+      - ".whitesource"
+      - "gradle/libs.versions.toml"
+      - "gradle/verification-metadata.xml"
+      - "gradle/verification-metadata-clean.xml"
+      - "gradle/wrapper/gradle-wrapper.properties"
+      - ".qlty/**"
 
 permissions: read-all
 

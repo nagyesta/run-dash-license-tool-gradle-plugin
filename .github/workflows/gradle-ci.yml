@@ -5,29 +5,30 @@ name: JavaCI-PR
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'gradle/libs.versions.toml'
-      - 'gradle/verification-metadata.xml'
-      - 'gradle/wrapper/gradle-wrapper.properties'
-      - '.github/workflows/gradle-ci.yml'
+      - "gradle/libs.versions.toml"
+      - "gradle/verification-metadata.xml"
+      - "gradle/wrapper/gradle-wrapper.properties"
+      - ".github/workflows/gradle-ci.yml"
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths-ignore:
-      - 'README.md'
-      - '**/README.md'
-      - 'CODE_OF_CONDUCT.md'
-      - 'CONTRIBUTING.md'
-      - 'pull_request_template.md'
-      - 'SECURITY.md'
-      - 'LICENSE'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.github/assets/**'
-      - '.github/workflows/**'
-      - '!.github/workflows/gradle-ci.yml'
-      - '.github/pr-labeler.yml'
-      - 'renovate.json'
-      - '.whitesource'
+      - "README.md"
+      - "**/README.md"
+      - "CODE_OF_CONDUCT.md"
+      - "CONTRIBUTING.md"
+      - "pull_request_template.md"
+      - "SECURITY.md"
+      - "LICENSE"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/assets/**"
+      - ".github/workflows/**"
+      - "!.github/workflows/gradle-ci.yml"
+      - ".github/pr-labeler.yml"
+      - "renovate.json"
+      - ".whitesource"
+      - ".qlty/**"
 
 permissions: read-all
 
@@ -35,7 +36,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest ]
+        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -59,4 +60,3 @@ jobs:
           name: test-report-run-dash-license-tool-gradle-plugin-${{ matrix.os }}
           path: build/reports/tests/test
           retention-days: 5
-

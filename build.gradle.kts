@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: MIT
  */
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.*
 
@@ -47,13 +48,15 @@ versioner {
 }
 
 tasks {
-    withType<KotlinCompile> { kotlinOptions { jvmTarget = "17" } }
+    withType<KotlinCompile> { compilerOptions { jvmTarget = JvmTarget.JVM_17 } }
 }
 
 dependencies {
     implementation(libs.kotlin.stdlib)
-    testImplementation(libs.jupiter.core)
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    testImplementation(libs.jupiter.core)
     testImplementation(gradleTestKit())
 }
 
@@ -83,10 +86,8 @@ tasks.cyclonedxBom {
     setOutputFormat("json")
     //noinspection UnnecessaryQualifiedReference
     val attachmentText = org.cyclonedx.model.AttachmentText()
-    attachmentText.setText(
-        Base64.getEncoder().encodeToString(
-            file("${project.rootProject.projectDir}/LICENSE").readBytes()
-        )
+    attachmentText.text = Base64.getEncoder().encodeToString(
+        file("${project.rootProject.projectDir}/LICENSE").readBytes()
     )
     attachmentText.encoding = "base64"
     attachmentText.contentType = "text/plain"
@@ -105,6 +106,8 @@ licensee {
 }
 
 val copyLegalDocs = tasks.register("copyLegalDocs", Copy::class) {
+    group = "documentation"
+    description = "Copies legal files and reports."
     from(file("${project.rootProject.projectDir}/LICENSE"))
     from(layout.buildDirectory.file("reports/licensee/artifacts.json").get().asFile)
     from(layout.buildDirectory.file("reports/bom.json").get().asFile)
