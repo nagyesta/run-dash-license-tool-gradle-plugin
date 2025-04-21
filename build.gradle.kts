@@ -126,6 +126,7 @@ tasks.processResources.get().finalizedBy(copyLegalDocs)
 
 tasks.test {
     useJUnitPlatform()
+    testLogging.showStandardStreams = true
 }
 
 repositories {

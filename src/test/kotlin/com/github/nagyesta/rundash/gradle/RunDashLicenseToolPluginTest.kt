@@ -6,7 +6,8 @@ package com.github.nagyesta.rundash.gradle
 
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import java.io.File
@@ -23,6 +24,7 @@ class RunDashLicenseToolPluginTest {
             .withPluginClasspath()
             .withProjectDir(File(path))
             .withArguments("clean", "runDashLicenseTool", "--stacktrace")
+            .forwardOutput()
             .build()
 
         //then
@@ -45,6 +47,7 @@ class RunDashLicenseToolPluginTest {
             .withPluginClasspath()
             .withProjectDir(File(path))
             .withArguments("clean", "runDashLicenseTool", "--stacktrace")
+            .forwardOutput()
             .build()
 
         //then
