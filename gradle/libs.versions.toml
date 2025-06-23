@@ -1,11 +1,11 @@
 [versions]
-kotlin = "2.1.21"
+kotlin = "2.2.0"
 jupiter = "5.13.1"
 
 pluginPublishPlugin = "1.3.1"
 gitVersionerPlugin = "1.6.7"
 indexScanPlugin = "3.1.1"
-owaspPlugin = "12.1.2"
+owaspPlugin = "12.1.3"
 cycloneDxBomPlugin = "2.3.1"
 licenseePlugin = "1.13.0"
 
