@@ -21,11 +21,8 @@ on:
       - "pull_request_template.md"
       - "SECURITY.md"
       - "LICENSE"
-      - ".github/ISSUE_TEMPLATE/**"
-      - ".github/assets/**"
-      - ".github/workflows/**"
+      - ".github/**"
       - "!.github/workflows/gradle-ci.yml"
-      - ".github/pr-labeler.yml"
       - "renovate.json"
       - ".whitesource"
       - ".qlty/**"
@@ -44,6 +41,8 @@ jobs:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: 0
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
       - name: Setup JDK 17
         uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
         with:
