@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: MIT
  */
 
+import org.cyclonedx.Version
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.*
@@ -64,26 +65,24 @@ gradlePlugin {
     website.set("https://github.com/nagyesta/run-dash-license-tool-gradle-plugin")
     vcsUrl.set("https://github.com/nagyesta/run-dash-license-tool-gradle-plugin")
     plugins {
-        create("runDashLicenseToolPlugin") {
+        create("runDashLicenseToolPlugin", fun PluginDeclaration.() {
             displayName = "Run Dash License Tool Gradle Plugin"
             description = "Adds a convenient task to run the Eclipse Dash License Tool on your Gradle build"
             id = "io.github.nagyesta.run-dash-license-tool-gradle-plugin"
             implementationClass = "com.github.nagyesta.rundash.gradle.RunDashLicenseToolPlugin"
             tags.set(listOf("dash-license-tool", "license-check", "license", "dash", "run-dash"))
-        }
+        })
     }
 }
 
 
 tasks.cyclonedxBom {
-    setIncludeConfigs(listOf("runtimeClasspath"))
-    setSkipConfigs(listOf("compileClasspath", "testCompileClasspath"))
-    setSkipProjects(listOf())
-    setProjectType("library")
-    setSchemaVersion("1.5")
-    setDestination(file("build/reports"))
-    setOutputName("bom")
-    setOutputFormat("json")
+    projectType.set(org.cyclonedx.model.Component.Type.LIBRARY)
+    schemaVersion.set(Version.VERSION_16)
+    includeConfigs.set(listOf("runtimeClasspath"))
+    skipConfigs.set(listOf("compileClasspath", "testCompileClasspath"))
+    skipProjects.set(listOf())
+    jsonOutput = project.layout.buildDirectory.file("reports/bom.json").get().asFile
     //noinspection UnnecessaryQualifiedReference
     val attachmentText = org.cyclonedx.model.AttachmentText()
     attachmentText.text = Base64.getEncoder().encodeToString(
@@ -96,8 +95,8 @@ tasks.cyclonedxBom {
     license.name = "MIT License"
     license.setLicenseText(attachmentText)
     license.url = "https://raw.githubusercontent.com/nagyesta/run-dash-license-tool-gradle-plugin/main/LICENSE"
-    setLicenseChoice {
-        it.addLicense(license)
+    licenseChoice = org.cyclonedx.model.LicenseChoice().apply {
+        addLicense(license)
     }
 }
 
