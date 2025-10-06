@@ -76,12 +76,11 @@ gradlePlugin {
 }
 
 
-tasks.cyclonedxBom {
+tasks.cyclonedxDirectBom {
     projectType.set(org.cyclonedx.model.Component.Type.LIBRARY)
     schemaVersion.set(Version.VERSION_16)
     includeConfigs.set(listOf("runtimeClasspath"))
     skipConfigs.set(listOf("compileClasspath", "testCompileClasspath"))
-    skipProjects.set(listOf())
     jsonOutput = project.layout.buildDirectory.file("reports/bom.json").get().asFile
     //noinspection UnnecessaryQualifiedReference
     val attachmentText = org.cyclonedx.model.AttachmentText()
@@ -116,7 +115,7 @@ val copyLegalDocs = tasks.register("copyLegalDocs", Copy::class) {
     into(layout.buildDirectory.dir("resources/main/META-INF").get().asFile)
 }.get()
 copyLegalDocs.dependsOn(tasks.licensee)
-copyLegalDocs.dependsOn(tasks.cyclonedxBom)
+copyLegalDocs.dependsOn(tasks.cyclonedxDirectBom)
 tasks.jar.get().dependsOn(copyLegalDocs)
 tasks.javadoc.get().dependsOn(copyLegalDocs)
 tasks.compileTestKotlin.get().dependsOn(copyLegalDocs)
