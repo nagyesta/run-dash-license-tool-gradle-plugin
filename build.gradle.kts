@@ -48,6 +48,8 @@ versioner {
     }
 }
 
+versioner.apply()
+
 tasks {
     withType<KotlinCompile> { compilerOptions { jvmTarget = JvmTarget.JVM_17 } }
 }
@@ -130,6 +132,21 @@ tasks.test {
 repositories {
     mavenCentral()
 }
+
+val writeVersion = tasks.register<DefaultTask>("writeVersion") {
+    group = "versioning"
+    description = "Writes project version to a file."
+    outputs.file(layout.buildDirectory.file("version").get().asFile)
+    inputs.property("version", project.version)
+
+    val versionFile = file("build/version")
+    val versionText = project.version.toString()
+    doLast {
+        versionFile.writeText("v${versionText}")
+    }
+    mustRunAfter(tasks.clean)
+}.get()
+tasks.build.get().dependsOn(writeVersion)
 
 publishing {
     repositories {
